@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.impl;
 
 import jakarta.validation.Valid;
 import org.example.entity.User;

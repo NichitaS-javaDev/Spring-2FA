@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AppConfig {
+public class BaseConfig {
     @Bean
     public SecretGenerator secretGenerator() {
-        return new DefaultSecretGenerator();
+        return new DefaultSecretGenerator(64);
     }
 
     @Bean

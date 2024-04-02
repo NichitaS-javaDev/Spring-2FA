@@ -1,11 +1,13 @@
-package org.example.service;
+package org.example.service.impl;
 
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.example.entity.User;
+import org.example.mfa.MFATokenManager;
 import org.example.security.MfaBasedAuthenticationToken;
-import org.springframework.http.ResponseEntity;
+import org.example.service.IAuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -25,7 +27,9 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
-public class AuthenticationService {
+public class AuthenticationService implements IAuthenticationService {
+    private final MFATokenManager mfaTokenManager;
+    private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
     private final SecurityContextRepository securityContextRepository;
@@ -62,4 +66,22 @@ public class AuthenticationService {
             throw new UsernameNotFoundException("User not found");
         }
     }
+
+    public Map<String, String> register(User newUser) {
+        Map<String, String> response = new HashMap<>();
+
+        if (newUser.isMfaEnabled()) {
+            String secret = mfaTokenManager.generateSecretKey();
+            newUser.setSecret(secret);
+        }
+
+        userService.saveUser(newUser);
+
+        response.put("role", newUser.getRole());
+        response.put("email", newUser.getEmail());
+        response.put("username", newUser.getUsername());
+
+        return response;
+    }
+
 }

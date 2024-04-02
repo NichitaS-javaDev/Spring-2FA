@@ -1,6 +1,5 @@
-package org.example.service;
+package org.example.security;
 
-import org.example.entity.AwareUser;
 import org.example.entity.User;
 import org.example.repo.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class AwareUserDetailsService implements UserDetailsService {
     @Autowired
     private IUserRepo userRepository;
 
