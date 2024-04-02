@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import dev.samstevens.totp.exceptions.QrGenerationException;
+import lombok.AllArgsConstructor;
 import org.example.entity.User;
 import org.example.mfa.MFATokenManager;
 import org.example.security.AwareUser;
@@ -19,10 +20,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
-    @Autowired
     private MFATokenManager mfaTokenManager;
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @GetMapping("/getQrCode")

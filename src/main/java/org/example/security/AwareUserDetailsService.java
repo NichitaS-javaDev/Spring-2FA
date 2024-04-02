@@ -1,5 +1,6 @@
 package org.example.security;
 
+import lombok.AllArgsConstructor;
 import org.example.entity.User;
 import org.example.repo.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class AwareUserDetailsService implements UserDetailsService {
-    @Autowired
     private IUserRepo userRepository;
 
     @Override
