@@ -3,7 +3,6 @@ package org.example.security;
 import lombok.AllArgsConstructor;
 import org.example.entity.User;
 import org.example.repo.IUserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

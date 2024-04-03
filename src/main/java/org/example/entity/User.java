@@ -1,7 +1,6 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +22,13 @@ public class User {
     private boolean mfaEnabled;
     private String secret;
 
-    public void setRole(String role) {
+    public User(Long id, String username, String email, String password, String role, boolean mfaEnabled, String secret) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
         this.role = role.toUpperCase();
-    }
-
-    public User role(String role) {
-        this.setRole(role);
-        return this;
+        this.mfaEnabled = mfaEnabled;
+        this.secret = secret;
     }
 }
